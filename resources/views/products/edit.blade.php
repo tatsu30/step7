@@ -17,7 +17,7 @@
                             <input type="hidden" name="id" value="{{ $product->id }}">
 
                             <div class="mb-3">
-                                <label for="product_id" class="form-label">商品ID</label>
+                                <label for="product_id" class="form-label">商品情報ID</label>
                                 <input type="text" class="form-control" id="product_id" name="product_id" value="{{ $product->id }}" readonly>
                             </div>
                             

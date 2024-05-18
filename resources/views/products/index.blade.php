@@ -49,20 +49,20 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>商品名</th>
-                    <th>メーカー</th>
-                    <th>価格
+                    <th style="position: sticky; top: 0; background-color: white;">ID</th>
+                    <th style="position: sticky; top: 0; background-color: white;">商品名</th>
+                    <th style="position: sticky; top: 0; background-color: white;">メーカー</th>
+                    <th style="position: sticky; top: 0; background-color: white;">価格
                         <a href="{{ request()->fullUrlWithQuery(['sort' => 'price', 'direction' => 'asc']) }}">↑</a>
                         <a href="{{ request()->fullUrlWithQuery(['sort' => 'price', 'direction' => 'desc']) }}">↓</a>
                     </th>
-                    <th>在庫数
+                    <th style="position: sticky; top: 0; background-color: white;">在庫数
                         <a href="{{ request()->fullUrlWithQuery(['sort' => 'stock', 'direction' => 'asc']) }}">↑</a>
                         <a href="{{ request()->fullUrlWithQuery(['sort' => 'stock', 'direction' => 'desc']) }}">↓</a>
                     </th>
-                    <th>コメント</th>
-                    <th>商品画像</th>
-                    <th>操作</th>
+                    <th style="position: sticky; top: 0; background-color: white;">コメント</th>
+                    <th style="position: sticky; top: 0; background-color: white;">商品画像</th>
+                    <th style="position: sticky; top: 0; background-color: white;">操作</th>
                 </tr>
             </thead>
             <tbody>
