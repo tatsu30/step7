@@ -53,7 +53,9 @@
                             <div class="mb-3">
                                 <label for="img_path" class="form-label">商品画像:</label>
                                 <input id="img_path" type="file" name="img_path" class="form-control">
-                                <img src="{{ asset($product->img_path) }}" alt="商品画像" class="product-image">
+                                @if ($product->img_path)
+                                    <img src="{{ asset($product->img_path) }}" alt="商品画像" class="product-image mt-2" width="150">
+                                @endif
                             </div>
 
                             <button type="submit" class="btn btn-primary">変更内容で更新する</button>

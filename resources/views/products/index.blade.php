@@ -28,16 +28,14 @@
         
     </form>
     <div class="form-group">
-       <label for="company_id">メーカー：</label>
-       <select name="company_id" id="company_id" class="form-control">
-           <option value="">すべてのメーカー</option>
-           @if(is_array($companies))
-               @foreach($companies as $id => $company)
-                  <option value="{{ $id }}" {{ request('company_id') == $id ? 'selected' : '' }}>{{ $company }}</option>
-               @endforeach
-           @endif
-       </select>
-   </div>
+        <label for="company_id">メーカー：</label>
+        <select name="company_id" id="company_id" class="form-control">
+            <option value="">すべてのメーカー</option>
+            @foreach($companies as $id => $company)
+                <option value="{{ $id }}" {{ request('company_id') == $id ? 'selected' : '' }}>{{ $company }}</option>
+            @endforeach
+        </select>
+    </div>
 </div>
 
 <a href="{{ route('products.index') }}" class="btn btn-success mt-3">検索条件を元に戻す</a>
@@ -70,7 +68,7 @@
                 <tr>
                     <td>{{ $product->id }}</td> 
                     <td>{{ $product->product_name }}</td>
-                    <td>{{ $product->company->name }}</td>
+                    <td>{{ $product->company->company_name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->stock }}</td>
                     <td>{{ $product->comment ? $product->comment : '初期値' }}</td>

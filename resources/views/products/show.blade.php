@@ -14,7 +14,7 @@
         <dd class="col-sm-9">{{ $product->product_name }}</dd>
 
         <dt class="col-sm-3">メーカー</dt>
-        <dd class="col-sm-9">{{ $product->company->name }}</dd>
+        <dd class="col-sm-9">{{ $product->company->company_name }}</dd>
 
         <dt class="col-sm-3">価格</dt>
         <dd class="col-sm-9">{{ $product->price }}</dd>
