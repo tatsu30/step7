@@ -10,15 +10,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
-Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
-Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
-
 class ProductController extends Controller
 {
     public function __construct()
@@ -39,32 +30,43 @@ class ProductController extends Controller
 
         $query = Product::query();
 
-        if ($companyId) {
+        if ($search = $request->input('search')) {
+            $query->where('product_name', 'like', "%{$search}%");
+        }
+    
+        if ($companyId = $request->input('company_id')) {
             $query->where('company_id', $companyId);
         }
-        if ($search) {
-            $query->where('product_name', 'like', '%' . $search . '%');
-        }
-        if ($priceMin) {
+    
+        if ($priceMin = $request->input('price_min')) {
             $query->where('price', '>=', $priceMin);
         }
-        if ($priceMax) {
+    
+        if ($priceMax = $request->input('price_max')) {
             $query->where('price', '<=', $priceMax);
         }
-        if ($stockMin) {
+    
+        if ($stockMin = $request->input('stock_min')) {
             $query->where('stock', '>=', $stockMin);
         }
-        if ($stockMax) {
+    
+        if ($stockMax = $request->input('stock_max')) {
             $query->where('stock', '<=', $stockMax);
         }
-        if ($sort) {
+
+        if ($sort = $request->input('sort')) {
+            $direction = $request->input('direction', 'asc');
             $query->orderBy($sort, $direction);
+        } else {
+            $query->orderBy('id', 'asc'); 
         }
-
-        $products = $query->paginate(10);
-        $companies = Company::pluck('company_name', 'id');
-
-        return view('products.index', compact('products', 'companies'));
+    
+        $products = $query->paginate(10); 
+    
+        return view('products.index', [
+            'products' => $products,
+            'companies' => Company::pluck('company_name', 'id'),
+        ]);
     }
 
     public function search(Request $request)

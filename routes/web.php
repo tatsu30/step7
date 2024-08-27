@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('products', ProductController::class);
 
 Route::get('/', function () {
     if (Auth::check()) {

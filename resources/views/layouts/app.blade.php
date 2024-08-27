@@ -82,7 +82,6 @@
         $(".search").click(function(){
        $.ajax({
          type:"GET",
-         url:"{{ route('product') }}",
          dataType: 'json',
       })   
       .done(function(json){
