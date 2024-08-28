@@ -87,37 +87,60 @@
     {{ $products->appends(request()->query())->links() }}
 </div>
 @endsection
+@vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-@push('scripts')
-<script>
+    <script>
     console.log(typeof jQuery);
-$(document).on('click', '.delete-button', function() {
-    let id = $(this).data('id');
-    console.log("削除ボタンがクリックされました: ", id); // デバッグ用
 
-    if (confirm('本当に削除しますか？')) {
-        $.ajax({
-            url: `{{ url('products') }}/${id}`,
-            type: 'POST',
-            data: {
-                '_method': 'DELETE',
-                '_token': '{{ csrf_token() }}'
-            },
-            success: function(result) {
-                console.log("サーバーからの応答: ", result); // デバッグ用
-                if (result.success) {
-                    $(`#productRow${id}`).remove();
-                    alert(result.message);
-                } else {
+    
+    $(document).on('click', '.delete-button', function() {
+        let id = $(this).data('id');
+        console.log("削除ボタンがクリックされました: ", id);
+
+        if (confirm('本当に削除しますか？')) {
+            $.ajax({
+                url: `{{ url('products') }}/${id}`,
+                type: 'POST',
+                data: {
+                    '_method': 'DELETE',
+                    '_token': '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    console.log("サーバーからの応答: ", result); 
+                    if (result.success) {
+                        $(`#productRow${id}`).remove();
+                        alert(result.message);
+                    } else {
+                        alert('削除に失敗しました');
+                    }
+                },
+                error: function(result) {
+                    console.error("エラーが発生しました: ", result);
                     alert('削除に失敗しました');
                 }
+            });
+        }
+    });
+
+    
+    $('#searchForm').on('submit', function(e) {
+        e.preventDefault(); 
+
+        $.ajax({
+            url: '{{ route('products.index') }}', 
+            type: 'GET',
+            data: $(this).serialize(), 
+            success: function(response) {
+                
+                $('.products').html($(response).find('.products').html());
             },
             error: function(result) {
-                console.error("エラーが発生しました: ", result); // デバッグ用
-                alert('削除に失敗しました');
+                console.error("検索中にエラーが発生しました: ", result); 
+                alert('検索中にエラーが発生しました。');
             }
         });
-    }
-});
+    });
 </script>
-@endpush
+
+

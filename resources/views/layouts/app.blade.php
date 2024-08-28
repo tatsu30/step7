@@ -13,9 +13,8 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    
 </head>
 <body>
     <div id="app">
@@ -77,24 +76,6 @@
             @yield('content')
         </main>
     </div>
-
-    <script>
-        $(".search").click(function(){
-       $.ajax({
-         type:"GET",
-         dataType: 'json',
-      })   
-      .done(function(json){
-        alert('ajax成功');
-      })
-      .fail(function(){
-        alert('ajax失敗');
-      })
-      .always(function(){
-         
-      });
-   });
-    </script>
 
 </body>
 </html>
